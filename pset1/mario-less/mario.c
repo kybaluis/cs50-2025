@@ -8,48 +8,45 @@ int is_positive_integer(char c[]);
 
 int main(void)
 {
-    char tallness[100];
+    char height[100];
+    // Ask for pyramid height; insist until a positive number is provided
     do
     {
-        printf("Say, how big do you want the pyramid to be? ");
-        scanf("%99s", tallness);
+        printf("Say, how many levels do you want the pyramid to be? ");
+        scanf("%99s", height);
     }
-    while(is_positive_integer(tallness) == 0 || atoi(tallness) == 0);
+    while (is_positive_integer(height) == 0);
 
-    build_pyramid(atoi(tallness));
+    build_pyramid(atoi(height));
 }
 
-void build_pyramid(int height)
+void build_pyramid(int n)
 {
-    // i = row_number and j = column_number
-    for (int i = 1; i <= height; i++)
+    // Pyramids are built in a kind of grid with i-rows and j-columns
+    for (int i = 1; i <= n; i++)
     {
-        for (int j = height; j >= i; j--)
+        for (int j = 1; j <= n; j++)
         {
-            //Checks whether white-space padding is needed
-            if (j > i)
+            // The higher the pyramid, the more padding is needed in the first rows & columns  
+            if (i + j <= n)
             {
                 printf(" ");
             }
             else
             {
-                int current_row = i;
-                while (current_row > 0)
-                {
-                    printf("#");
-                    current_row--;
-                }
+                printf("#");
             }
         }
         printf("\n");
     }
 }
 
+// Checks whether the string corresponds to an actual positive and valid integer
 int is_positive_integer(char c[])
 {
-    for (int i=0, length=strlen(c); i<length; i++)
+    for (int i = 0, length = strlen(c); i < length; i++)
     {
-        if (isdigit(c[i]) == 0)
+        if (isdigit(c[i]) == 0 || atoi(c) == 0)
         {
             return 0;
         }
