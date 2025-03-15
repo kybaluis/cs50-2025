@@ -1,27 +1,39 @@
 #include <stdio.h>
 
-void construct_pyramid();
+void build_pyramid();
 int main(void)
 {
     int tallness;
-
-    printf("Say, how big do you want the pyramid to be? ");
-    scanf("%d", &tallness);
-    construct_pyramid(tallness);
+    do
+    {
+        printf("Say, how big do you want the pyramid to be? ");
+        scanf("%d", &tallness);
+    }
+    while(tallness < 0 || tallness > 8);
+    
+    build_pyramid(tallness);
 }
 
-void construct_pyramid(int height)
+void build_pyramid(int height)
 {
-    /* while(height > 0)
+    // i = row_number and j = column_number
+    for (int i = 1; i <= height; i++)
     {
-        printf("#  #\n");
-        height--;
-    }*/
-    for (int i = 0; i < height; i++)
-    {
-        for (int j = 0; j <= i; j++)
+        for (int j = height; j >= i; j--)
         {
-            printf("#");
+            if(j > i)
+            {
+                printf(" ");
+            }
+            else
+            {
+                int current_row = i;
+                while (current_row > 0)
+                {
+                    printf("#");
+                    current_row--;
+                }
+            }
         }
         printf("\n");
     }
