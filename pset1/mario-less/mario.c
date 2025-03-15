@@ -1,17 +1,22 @@
 #include <stdio.h>
+#include <ctype.h>
+#include <string.h>
+#include <stdlib.h>
 
-void build_pyramid();
+void build_pyramid(int height);
+int is_positive_integer(char c[]);
+
 int main(void)
 {
-    int tallness;
+    char tallness[100];
     do
     {
         printf("Say, how big do you want the pyramid to be? ");
-        scanf("%d", &tallness);
+        scanf("%99s", tallness);
     }
-    while(tallness < 0 || tallness > 8);
-    
-    build_pyramid(tallness);
+    while(is_positive_integer(tallness) == 0 || atoi(tallness) == 0);
+
+    build_pyramid(atoi(tallness));
 }
 
 void build_pyramid(int height)
@@ -21,7 +26,8 @@ void build_pyramid(int height)
     {
         for (int j = height; j >= i; j--)
         {
-            if(j > i)
+            //Checks whether white-space padding is needed
+            if (j > i)
             {
                 printf(" ");
             }
@@ -37,4 +43,16 @@ void build_pyramid(int height)
         }
         printf("\n");
     }
+}
+
+int is_positive_integer(char c[])
+{
+    for (int i=0, length=strlen(c); i<length; i++)
+    {
+        if (isdigit(c[i]) == 0)
+        {
+            return 0;
+        }
+    }
+    return 1;
 }
