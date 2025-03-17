@@ -23,7 +23,18 @@ int main(void)
 
     int index = coleman_liau(letters, words, sentences);
 
-    printf("Grade %d\n", index);
+    if (index < 1)
+    {
+        printf("Before Grade 1\n");
+    }
+    else if (index > 16)
+    {
+        printf("Grade 16+\n");
+    }
+    else
+    {
+        printf("Grade %d\n", index);
+    }
 }
 
 int coleman_liau(int letters, int words, int sentences)
