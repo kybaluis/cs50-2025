@@ -28,17 +28,20 @@ int main(void)
     {
         printf("Tie!\n");
     }
-    printf("Player 1 score is: %d", score1);
-    printf("Player 2 score is: %d", score2);
 }
 
+// Takes a word as input and calculates the scrabble score
 int scrabble_scoring(char word[])
 {
     int score = 0;
     int word_length = strlen(word);
-    for (int i = 0, length = strlen(word); i < length; i++)
+    // Iterates over each character in the word
+    for (int i = 0; i < word_length; i++)
     {
+        // For simplicity, all words are treated as lower case
         word[i] = tolower(word[i]);
+
+        // Common letters have less value in Scrabble
         if (word[i] == 'a' || word[i] == 'e' || word[i] == 'i'
             || word[i] == 'l' || word[i] == 'n' || word[i] == 'o' 
             || word[i] == 'r' || word[i] == 's' || word[i] == 't' || word[i] == 'u')
@@ -49,11 +52,11 @@ int scrabble_scoring(char word[])
         {
             score += 2;
         }
-         else if (word[i] == 'b' || word[i] == 'c' || word[i] == 'm' || word[i] == 'p')
+        else if (word[i] == 'b' || word[i] == 'c' || word[i] == 'm' || word[i] == 'p')
         {
             score += 3;
         }
-        else if (word[i] == 'f' || word[i] == 'h'|| word[i] == 'v'|| word[i] == 'w' || word[i] == 'y')
+        else if (word[i] == 'f' || word[i] == 'h' || word[i] == 'v' || word[i] == 'w' || word[i] == 'y')
         {
             score += 4;
         }
