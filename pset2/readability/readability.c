@@ -3,6 +3,7 @@
 #include <ctype.h>
 #include <math.h>
 
+int coleman_liau(int letters, int words, int sentences);
 int count_letters(char text[]);
 int count_words(char text[]);
 int count_sentences(char text[]);
@@ -15,16 +16,24 @@ int main(void)
     printf("Enter the text to be evaluated: ");
     scanf("%499[^\n]", text);
 
+    // Call three different functions to count letters, words, and sentences respectively
     int letters = count_letters(text);
     int words = count_words(text);
     int sentences = count_sentences(text);
 
-    float l = 100 * letters / words;
-    float s = 100 * sentences / words;
-
-    int index = round(0.0588 * l - 0.296 * s - 15.8);
+    int index = coleman_liau(letters, words, sentences);
 
     printf("Grade %d\n", index);
+}
+
+int coleman_liau(int letters, int words, int sentences)
+{
+    // Calculates average of letters and sentences per 100 words each
+    float l = (float) 100 * letters / words;
+    float s = (float) 100 * sentences / words;
+
+    // Returns the Coleman-Liau index after applying the formula
+    return round(0.0588 * l - 0.296 * s - 15.8);
 }
 
 int count_letters(char text[])
