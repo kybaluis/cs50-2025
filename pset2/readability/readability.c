@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
+#include <math.h>
 
 int count_letters(char text[]);
 int count_words(char text[]);
@@ -21,9 +22,9 @@ int main(void)
     float l = 100 * letters / words;
     float s = 100 * sentences / words;
 
-    float index = 0.0588 * l - 0.296 * s - 15.8;
+    int index = round(0.0588 * l - 0.296 * s - 15.8);
 
-    printf("%f\n", index);
+    printf("Grade %d\n", index);
 }
 
 int count_letters(char text[])
@@ -39,6 +40,7 @@ int count_letters(char text[])
             counter++;
         }
     }
+   //printf("%d", counter);
     return counter;
 }
 
@@ -53,10 +55,21 @@ int count_words(char text[])
             counter++;
         }
     }
+    //printf("%d", counter);
     return counter;
 }
 
 int count_sentences(char text[])
 {
-    return 3;
+    int counter = 0;
+    int text_length = strlen(text);
+    for (int i = 0; i < text_length; i++)
+    {
+        if (text[i] == '.' || text[i] == '?' || text[i] == '!')
+        {
+            counter++;
+        }
+    }
+    //printf("%d", counter);
+    return counter;
 }
