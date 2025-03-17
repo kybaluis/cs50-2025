@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <string.h>
+#include <ctype.h>
 
 int count_letters(char text[]);
 int count_words(char text[]);
@@ -8,8 +10,9 @@ int main(void)
 {
     char text[500];
 
+    // Reads all user input everything until a newline is encountered
     printf("Enter the text to be evaluated: ");
-    scanf("499%s", text);
+    scanf("%499[^\n]", text);
 
     int letters = count_letters(text);
     int words = count_words(text);
@@ -25,7 +28,19 @@ int main(void)
 
 int count_letters(char text[])
 {
-    return 80;
+    int counter = 0;
+    int text_length = strlen(text);
+    for (int i = 0; i < text_length; i++)
+    {
+        // For simplicity, all words are treated as lower case
+        text[i] = tolower(text[i]);
+        if (isalnum(text[i]))
+        {
+            counter++;
+        }
+    }
+    printf("%d", counter);
+    return counter;
 }
 
 int count_words(char text[])
