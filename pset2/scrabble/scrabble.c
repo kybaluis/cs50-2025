@@ -42,9 +42,8 @@ int scrabble_scoring(char word[])
         word[i] = tolower(word[i]);
 
         // Common letters have less value in Scrabble
-        if (word[i] == 'a' || word[i] == 'e' || word[i] == 'i'
-            || word[i] == 'l' || word[i] == 'n' || word[i] == 'o' 
-            || word[i] == 'r' || word[i] == 's' || word[i] == 't' || word[i] == 'u')
+        if (word[i] == 'a' || word[i] == 'e' || word[i] == 'i' || word[i] == 'l' || word[i] == 'n'
+            || word[i] == 'o' || word[i] == 'r' || word[i] == 's' || word[i] == 't' || word[i] == 'u')
         {
             score += 1;
         }
