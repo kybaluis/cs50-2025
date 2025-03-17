@@ -39,13 +39,21 @@ int count_letters(char text[])
             counter++;
         }
     }
-    printf("%d", counter);
     return counter;
 }
 
 int count_words(char text[])
 {
-    return 21;
+    int counter = 1;
+    int text_length = strlen(text);
+    for (int i = 0; i < text_length; i++)
+    {
+        if (isblank(text[i]))
+        {
+            counter++;
+        }
+    }
+    return counter;
 }
 
 int count_sentences(char text[])
