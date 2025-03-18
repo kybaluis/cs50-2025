@@ -12,7 +12,7 @@ int main(void)
 {
     char text[500];
 
-    // Reads all user input everything until a newline is encountered
+    // Rea all user input until a newline is encountered
     printf("Enter the text to be evaluated: ");
     scanf("%499[^\n]", text);
 
@@ -21,8 +21,10 @@ int main(void)
     int words = count_words(text);
     int sentences = count_sentences(text);
 
+    // Call the function that calculates the actual Coleman-Liau index
     int index = coleman_liau(letters, words, sentences);
 
+    // Depending on the index, the grade is determined
     if (index < 1)
     {
         printf("Before Grade 1\n");
@@ -55,6 +57,7 @@ int count_letters(char text[])
     {
         // For simplicity, all words are treated as lower case
         text[i] = tolower(text[i]);
+        // When either a letter or number is found, a new letter is assumed
         if (isalnum(text[i]))
         {
             counter++;
@@ -66,16 +69,21 @@ int count_letters(char text[])
 
 int count_words(char text[])
 {
-    int counter = 1;
+    int counter = 0;
     int text_length = strlen(text);
     for (int i = 0; i < text_length; i++)
     {
-        if (isblank(text[i]))
+        // The first blank space implies not one but two words
+        if (isblank(text[i]) && counter == 0)
+        {
+            counter += 2;
+        }
+        // Now blank spaces simply imply one additional word
+        else if (isblank(text[i]) && counter != 0)
         {
             counter++;
         }
     }
-    //printf("%d", counter);
     return counter;
 }
 
@@ -85,11 +93,11 @@ int count_sentences(char text[])
     int text_length = strlen(text);
     for (int i = 0; i < text_length; i++)
     {
+        // When either of these three symbols is found, a new sentence is assumed
         if (text[i] == '.' || text[i] == '?' || text[i] == '!')
         {
             counter++;
         }
     }
-    //printf("%d", counter);
     return counter;
 }
