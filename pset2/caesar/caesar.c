@@ -6,6 +6,11 @@ void caesar_cipher(int k, char plain[], char cipher[]);
 
 int main(int argc, char *argv[])
 {
+    if (argc != 2 || argv[1] < 0 || atoi(argv[1]) == 0)
+    {
+        printf("Usage: ./caesar key\n");
+        return 1;
+    }
     int k = atoi(argv[1]);
     char plain[50];
     char cipher[50];
