@@ -35,15 +35,18 @@ void caesar_cipher(int k, char plain[], char cipher[])
 
     for (int i = 0; i < length; i++)
     {
+        // If a character is not an actual letter but, say, a bang (!) is left unmodified
         while (!isalpha(plain[i]))
         {
             cipher[i] = plain[i];
             i++;
         }
+        // If the letter + key sum goes beyond this number, an 'alphabet overflow' has happened 
         if (plain[i] + k > 122)
         {
             cipher[i] = plain[i] + k - 26;
         }
+        // If nothing extraordinary happens, a simple letter + key rotation takes place 
         else
         {
             cipher[i] = plain[i] + k;
