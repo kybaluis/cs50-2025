@@ -7,14 +7,14 @@ void caesar_cipher(int k, char plain[], char cipher[]);
 
 int main(int argc, char *argv[])
 {
-    // The program won't run unless exactly one non-negative int is provided as argument
-    if (argc != 2 || argv[1] < 0 || atoi(argv[1]) == 0)
+    // The program won't run if either of the following oddities take place
+    if (argc != 2 || atoi(argv[1]) <= 0 || argv[1] == NULL || strcmp(argv[1], "\0") == 0)
     {
         printf("Usage: ./caesar key\n");
         return 1;
     }
     
-    // The 2nd argument (after the program name) is converted to int and will act as the key
+    // The 2nd argument  is converted to int and will act as the key
     int k = atoi(argv[1]);
     char plain[50], cipher[50];
 
@@ -25,6 +25,7 @@ int main(int argc, char *argv[])
     // Calls the cipher function which transforms plaintext -> ciphertext via address pointers
     caesar_cipher(k, plain, cipher);
     printf("ciphertext: %s\n", cipher);
+    return 0;
 }
 
 void caesar_cipher(int k, char plain[], char cipher[])
@@ -41,11 +42,13 @@ void caesar_cipher(int k, char plain[], char cipher[])
             cipher[i] = plain[i];
             i++;
         }
-        // If the letter + key sum goes beyond this number, an 'alphabet overflow' has happened 
+
+        // When letter + key surpasses this number, an overflow has happened and wrapping is needed
         if (plain[i] + k > 122)
         {
             cipher[i] = plain[i] + k - 26;
         }
+        
         // If nothing extraordinary happens, a simple letter + key rotation takes place 
         else
         {
