@@ -32,26 +32,22 @@ void caesar_cipher(int k, char plain[], char cipher[])
     // Since the English alphabet only has 26 letters, rotating beyond this number is redundant
     k = k % 26;
     int length = strlen(plain);
-    char temp;
 
     for (int i = 0; i < length; i++)
     {
-        if (isalpha(plain[i]))
+        while (!isalpha(plain[i]))
         {
-            if (plain[i] + k > 122)
-            {
-                temp = plain[i] + k - 26;
-            }
-            else
-            {
-                temp = plain[i] + k;
-            }
+            cipher[i] = plain[i];
+            i++;
+        }
+        if (plain[i] + k > 122)
+        {
+            cipher[i] = plain[i] + k - 26;
         }
         else
         {
-            temp = plain[i];
+            cipher[i] = plain[i] + k;
         }
-        cipher[i] = temp;
     }
     cipher[length] = '\0';
 }
