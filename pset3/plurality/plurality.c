@@ -45,13 +45,13 @@ int main(int argc, char *argv[])
     }
 
     int voter_count;
-    printf("number of voters: ");
+    printf("Number of voters: ");
     scanf("%d", &voter_count);
 
     // Loop over all voters
     for (int i = 0; i < voter_count; i++)
     {
-        printf("Enter the name ");
+        printf("Vote: ");
         scanf("%49s", name);
 
         // Check for invalid vote
@@ -62,13 +62,20 @@ int main(int argc, char *argv[])
     }
 
     // Display winner of election
-    print_winner();
+    printf("%d", candidates[1].votes);
+    printf("%d", candidates[2].votes);
+    printf("%d", candidates[3].votes);
+    // print_winner();
 }
 
 // Update vote totals given a new vote
 int vote(char name[])
 {
-    printf("%s", name);
+    if (strcmp(name, candidates[1].name) || strcmp(name, candidates[2].name) || strcmp(name, candidates[3].name))
+    {
+        candidates[1].votes++;
+        return 1;
+    }
     return 0;
 }
 
