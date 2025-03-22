@@ -66,32 +66,40 @@ int main(int argc, char *argv[])
 }
 
 // Update vote totals given a new vote
-int vote(char name[])
+int vote(char voted_name[])
 {
     for (int i = 0; i < candidate_count; i++)
     {
-        if (strcmp(name, candidates[i].name) == 0)
+        // Compares the voted name against all known candidates
+        if (strcmp(voted_name, candidates[i].name) == 0)
         {
             candidates[i].votes++;
             return 1;
         }
     }
+    // The candidate name provided in this void does not exist
     return 0;
 }
 
 // Print the winner (or winners) of the election
 void print_winner(void)
 {
+    // Until proven otherwise, the first candidate is considered the winner
     int winner_index = 0;
     int winner_votes = candidates[winner_index].votes;
+
+    // The votes of two candidates are compared on each iteration
     for (int i = 0; i < candidate_count - 1; i++)
     {
+        // The index of the winner is only updated if the current winner's votes are surpassed
         if (candidates[i].votes < candidates[i + 1].votes && winner_votes < candidates[i + 1].votes)
         {
             winner_index = i + 1;
             winner_votes = candidates[winner_index].votes;
         }
     }
+
+    // Makes sure to print all co-winners is case of a tie
     for (int i = 0; i < candidate_count; i++)
     {
         if (candidates[i].votes == winner_votes)
