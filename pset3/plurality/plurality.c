@@ -62,9 +62,6 @@ int main(int argc, char *argv[])
     }
 
     // Display winner of election
-    printf("%d", candidates[0].votes);
-    printf("%d", candidates[1].votes);
-    printf("%d", candidates[2].votes);
     print_winner();
 }
 
@@ -76,11 +73,9 @@ int vote(char name[])
         if (strcmp(name, candidates[i].name) == 0)
         {
             candidates[i].votes++;
-            printf("yes\n");
             return 1;
         }
     }
-    printf("no\n");
     return 0;
 }
 
@@ -91,15 +86,17 @@ void print_winner(void)
     int winner_votes = candidates[winner_index].votes;
     for (int i = 0; i < candidate_count - 1; i++)
     {
-        printf("vote left %d", candidates[i].votes);
-        printf("vote right %d", candidates[i + 1].votes);
         if (candidates[i].votes < candidates[i + 1].votes && winner_votes < candidates[i + 1].votes)
         {
             winner_index = i + 1;
             winner_votes = candidates[winner_index].votes;
-            printf("le entro\n");
         }
     }
-    printf("winner index is %d\n", winner_index);
-    printf("winner name is %s\n", candidates[winner_index].name);
+    for (int i = 0; i < candidate_count; i++)
+    {
+        if (candidates[i].votes == winner_votes)
+        {
+            printf("%s\n", candidates[i].name);
+        }
+    }
 }
