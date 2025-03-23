@@ -7,7 +7,7 @@
 // Candidates have name and vote count
 typedef struct
 {
-    char* name;
+    char *name;
     int votes;
 } candidate;
 
@@ -70,7 +70,7 @@ int vote(char voted_name[])
 {
     for (int i = 0; i < candidate_count; i++)
     {
-        // Compares the voted name against all known candidates
+        // Compare the voted name against all known candidates
         if (strcmp(voted_name, candidates[i].name) == 0)
         {
             candidates[i].votes++;
@@ -99,7 +99,7 @@ void print_winner(void)
         }
     }
 
-    // Makes sure to print all co-winners is case of a tie
+    // Make sure to print all co-winners is case of a tie
     for (int i = 0; i < candidate_count; i++)
     {
         if (candidates[i].votes == winner_votes)
