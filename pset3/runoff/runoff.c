@@ -209,7 +209,8 @@ int find_min(void)
 int is_tie(int min)
 {
     int disposable_candidates = 0;
-    // Makes sure to print all co-winners is case of ties
+
+    // Compare the votes of each (active) candidate against the min number of votes
     for (int i = 0; i < candidate_count; i++)
     {
         if (candidates[i].votes == min && candidates[i].eliminated == 0)
@@ -217,6 +218,7 @@ int is_tie(int min)
             disposable_candidates++;
         }
     }
+    // All remaining candidates have the same number of votes
     if (disposable_candidates == active_candidates)
     {
         return 1;
@@ -227,10 +229,10 @@ int is_tie(int min)
 // Eliminate the candidate (or candidates) in last place
 void eliminate(int min)
 {
-    printf("Hora de la eliminación\n");
     for (int i = 0; i < candidate_count; i++)
     {
-        if (candidates[i].votes == min && candidates[i].eliminated == 0)
+        // Only active candidates can be eliminated
+        if (candidates[i].votes == min && !candidates[i].eliminated)
         {
             candidates[i].eliminated = 1;
             active_candidates--;
