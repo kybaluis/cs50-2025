@@ -63,7 +63,6 @@ int count_letters(char text[])
             counter++;
         }
     }
-   //printf("%d", counter);
     return counter;
 }
 
