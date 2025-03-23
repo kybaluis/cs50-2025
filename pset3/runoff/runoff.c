@@ -19,12 +19,11 @@ typedef struct
 // Array of candidates
 candidate candidates[MAX_CANDIDATES];
 
-char name[50];
-
-// Numbers of voters and candidates
+// A few global variables
 int voter_count;
 int candidate_count;
 int active_candidates;
+char name[50];
 
 // Function prototypes
 int vote(int voter, int rank, char name[]);
@@ -43,7 +42,7 @@ int main(int argc, char *argv[])
         return 1;
     }
 
-    // Populate array of candidates
+    // Initialaze array of candidates
     candidate_count = argc - 1;
     active_candidates = candidate_count;
     if (candidate_count > MAX_CANDIDATES)
@@ -58,6 +57,7 @@ int main(int argc, char *argv[])
         candidates[i].eliminated = 0;
     }
 
+    // Set (and validate) number of voters
     printf("Number of voters: ");
     scanf("%d", &voter_count);
     if (voter_count > MAX_VOTERS)
@@ -69,7 +69,6 @@ int main(int argc, char *argv[])
     // Keep querying for votes
     for (int i = 0; i < voter_count; i++)
     {
-
         // Query for each rank
         for (int j = 0; j < candidate_count; j++)
         {
@@ -83,7 +82,6 @@ int main(int argc, char *argv[])
                 return 4;
             }
         }
-
         printf("\n");
     }
 
@@ -95,7 +93,7 @@ int main(int argc, char *argv[])
 
         // Check if election has been won
         int won = print_winner();
-        if (won == 1)
+        if (won)
         {
             break;
         }
@@ -104,8 +102,8 @@ int main(int argc, char *argv[])
         int min = find_min();
         int tie = is_tie(min);
 
-        // If tie, everyone wins
-        if (tie == 1)
+        // If tie, everyone not-yet-eliminated wins
+        if (tie)
         {
             for (int i = 0; i < candidate_count; i++)
             {
@@ -130,33 +128,34 @@ int main(int argc, char *argv[])
 }
 
 // Record preference if vote is valid
-int vote(int voter, int rank, char name[])
+int vote(int voter, int rank, char voted_name[])
 {
-    // printf("Flag1");
     for (int i = 0; i < candidate_count; i++)
     {
-        if (strcmp(name, candidates[i].name) == 0)
+        // Check whether the voted candidate exists
+        if (strcmp(voted_name, candidates[i].name) == 0)
         {
             preferences[voter][rank] = i;
             return 1;
         }
     }
+    // The voted name is not a valid candidate 
     return 0;
 }
 
 // Tabulate votes for non-eliminated candidates
 void tabulate(void)
 {
-    // printf("Flag2");
-    int selection = 0;
+    int preferred;
     for (int i = 0; i < voter_count; i++)
     {
         for (int j = 0; j < candidate_count; j++)
         {
-            selection = preferences[i][j];
-            if (!candidates[selection].eliminated)
+            // A voter's preferance is 0, if eliminated then 1, and so on
+            preferred = preferences[i][j];
+            if (!candidates[preferred].eliminated)
             {
-                candidates[selection].votes++;
+                candidates[preferred].votes++;
                 break;
             }
         }
@@ -169,7 +168,8 @@ int print_winner(void)
 {
     for (int i = 0; i < voter_count; i++)
     {
-        if (candidates[i].votes * 100 / voter_count > 50)
+        // A candidates wins only after obtaining more than 50% of the votes
+        if ((candidates[i].votes * 100 / voter_count) > 50)
         {
             printf("%s\n", candidates[i].name);
             return 1;
@@ -187,17 +187,18 @@ int find_min(void)
     // The votes of two candidates are compared on each iteration
     for (int i = 0; i < (candidate_count - 1); i++)
     {
-        // The minimum amount of votes is updated if the current candidate's votes are more than the next one
-        // .ignore if (candidate[i].votes > candidate[i + 1].votes && min_votes > candidate[i + 1].votes)
-        if (candidates[i].eliminated == 0 && candidates[i + 1].eliminated == 0)
+        // No comparison is made if the candidate is already eliminated or has more votes than the min
+        if ((candidates[i].eliminated == 0 && candidates[i + 1].eliminated == 0)
+            && (candidates[i].votes < min_votes || candidates[i + 1].votes < min_votes))
         {
-            if (candidates[i].votes > candidates[i + 1].votes && candidates[i + 1].eliminated == 0 && min_votes > candidates[i + 1].votes)
-            {
-                min_votes = candidates[i + 1].votes;
-            }
-            else if (candidates[i].eliminated == 0 && min_votes > candidates[i].votes)
+            // Either the 'left' or 'right' candidate has less votes than the current min
+            if (candidates[i].votes < candidates[i + 1].votes)
             {
                 min_votes = candidates[i].votes;
+            }
+            else
+            {
+                min_votes = candidates[i + 1].votes;
             }
         }
     }
