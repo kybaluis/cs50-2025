@@ -3,6 +3,21 @@
 #include <string.h>
 #include <stdlib.h>
 
+/*
+ * mario.c
+ * CS50 2025 pset 1.2
+ * ------------------------------------------
+ * Recreates a right-aligned pyramid using hash symbols (#) to represent bricks,
+ * prompting the user to enter the desired height (a positive integer),
+ * insisting until valid input is provided. 
+ *
+ * Example:
+ * Height: 3
+ *   #
+ *  ##
+ * ###
+ */
+
 void build_pyramid(int height);
 int is_positive_integer(char c[]);
 
