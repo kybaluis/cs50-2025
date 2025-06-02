@@ -5,7 +5,7 @@
 
 /*
  * readability.c
- * CS50 pset 2.2
+ * CS50 2025 pset 2.2
  * -----------------------------
  * Analyzes a block of text and computes the approximate 
  * U.S. grade level required to understand it.
