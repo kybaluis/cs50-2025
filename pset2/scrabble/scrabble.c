@@ -4,7 +4,7 @@
 
 /*
  * scrabble.c
- * CS50 pset 2.1
+ * CS50 2025 pset 2.1
  * --------------------------
  * Simulates a simplified two-player Scrabble game, prompting users to enter a word,
  * calculating the score of each word based on predefined letter values.
