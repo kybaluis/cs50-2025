@@ -3,6 +3,20 @@
 #include <string.h>
 #include <stdlib.h>
 
+/*
+ * cash.c
+ * CS50 2025 Problem 1.1
+ * -------------------------------------------
+ * Calculates the minimum number of coins required to give a customer change.
+ * The user is prompted to enter a  positive amount of change owed in cents,
+ * and the program calculates the fewest coins needed to give back such change  
+ * using U.S. denominations (quarters, dimes, nickels, and pennies).
+ *
+ * Example:
+ * Input: 41
+ * Output: 4 (1 quarter, 1 dime, 1 nickel, 1 penny)
+ */
+
 int is_positive_integer(char c[]);
 int coin_optimization(int debt);
 
