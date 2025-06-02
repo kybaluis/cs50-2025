@@ -5,7 +5,7 @@
 
 /*
  * cash.c
- * CS50 2025 pset 1.1
+ * CS50 2025 pset 1.3
  * -------------------------------------------
  * Calculates the minimum number of coins required to give a customer change.
  * The user is prompted to enter a  positive amount of change owed in cents,
