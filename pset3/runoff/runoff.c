@@ -1,6 +1,28 @@
 #include <stdio.h>
 #include <string.h>
 
+/*
+ * runoff.c
+ * CS50 2025 pset 3.3
+ * Note 1: The main function was coded by the CS50 team. I did code the rest of the functions 
+ * Note 2: I did remove the cs50 library altogether, switching from Strings to Chars[] accordingly 
+ * ------------------------
+ * Simulates an instant-runoff (ranked-choice) election.
+ * Voters rank candidates in order of preference. If no candidate receives
+ * more than 50% of the first-choice votes, the candidate with the fewest
+ * votes is eliminated. Votes are then redistributed to the next preferred,
+ * non-eliminated candidate. This process repeats until a winner emerges.
+ *
+ * Example:
+ * $ ./runoff Alice Bob Charlie
+ * Number of voters: 5
+ * Rank 1: Alice
+ * Rank 2: Bob
+ * Rank 3: Charlie
+ * ...
+ * Alice
+ */
+
 // Max voters and candidates
 #define MAX_VOTERS 100
 #define MAX_CANDIDATES 9
