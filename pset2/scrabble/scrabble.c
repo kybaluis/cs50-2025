@@ -2,6 +2,20 @@
 #include <string.h>
 #include <ctype.h>
 
+/*
+ * scrabble.c
+ * CS50 pset 2.1
+ * --------------------------
+ * Simulates a simplified two-player Scrabble game, prompting users to enter a word,
+ * calculating the score of each word based on predefined letter values.
+ * After comparing scores, the program either prints the winner or declares a tie .
+ * 
+ * Example:
+ * Player 1: CODE
+ * Player 2: QUIZ
+ * Output: Player 2 wins!
+ */
+
 int scrabble_scoring(char word[]);
 
 int main(void)
