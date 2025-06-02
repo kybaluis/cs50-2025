@@ -1,6 +1,28 @@
 #include <stdio.h>
 #include <string.h>
 
+/*
+ * plurality.c
+ * CS50 pset 3.2
+ * Note 1: pset 3.1 is in my repo because it was made entirely by the CS50 team
+ * Note 2: I only coded the vote and print_winner functions. The rest was created by the CS50 team
+ * Note 3: I did remove the cs50 library altogether, switching from Strings to Chars[] accordingly 
+ * ---------------------------
+ * Simulates a plurality election, where each voter casts a vote for one candidate.
+ * The candidate(s) with the highest number of votes win(s) the election.
+ * The program accepts candidate names as command-line argument,
+ * prompting the user to enter the number of voters and each vote by name.
+ *
+ * Example:
+ * $ ./plurality Alice Bob
+ * Number of voters: 3
+ * Vote: Alice
+ * Vote: Bob
+ * Vote: Alice
+ * Alice
+ */
+
+
 // Max number of candidates
 #define MAX 9
 
