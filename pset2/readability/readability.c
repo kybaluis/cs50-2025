@@ -3,6 +3,20 @@
 #include <ctype.h>
 #include <math.h>
 
+/*
+ * readability.c
+ * CS50 pset 2.2
+ * -----------------------------
+ * Analyzes a block of text and computes the approximate 
+ * U.S. grade level required to understand it.
+ * It does this by counting the number of letters, words, and sentences
+ * and then applying the Coleman-Liau index formula.
+ *
+ * Example:
+ * Input: Congratulations! Today is your day. You’re off to Great Places! You’re off and away!
+ * Output: Grade 3
+ */
+
 int coleman_liau(int letters, int words, int sentences);
 int count_letters(char text[]);
 int count_words(char text[]);
@@ -12,7 +26,7 @@ int main(void)
 {
     char text[500];
 
-    // Rea all user input until a newline is encountered
+    // Read all user input until a newline is encountered
     printf("Enter the text to be evaluated: ");
     scanf("%499[^\n]", text);
 
@@ -45,7 +59,7 @@ int coleman_liau(int letters, int words, int sentences)
     float l = (float) 100 * letters / words;
     float s = (float) 100 * sentences / words;
 
-    // Returns the Coleman-Liau index after applying the formula
+    // Returns the Coleman-Liau index after applying its formula
     return round(0.0588 * l - 0.296 * s - 15.8);
 }
 
